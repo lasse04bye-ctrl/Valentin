@@ -1,52 +1,60 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Valentin</title>
+
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f2f2f2;
       margin: 0;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
+      background: #f2f2f2;
+      font-family: Arial, sans-serif;
     }
+
     .captcha {
-      background: #fff;
-      border: 1px solid #ccc;
+      background: white;
       width: min(360px, 92vw);
+      border: 1px solid #ccc;
     }
+
     .header {
       background: #e74c3c;
       color: white;
       padding: 12px;
-      font-weight: bold;
       font-size: 14px;
+      font-weight: bold;
     }
+
     .sub {
       padding: 10px 12px;
       font-size: 12px;
       color: #444;
     }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 6px;
       padding: 12px;
     }
+
     .grid img {
       width: 100%;
-      aspect-ratio: 1/1;
+      aspect-ratio: 1 / 1;
       object-fit: cover;
       border: 2px solid transparent;
       border-radius: 6px;
     }
+
     .grid img.selected {
       border-color: #e74c3c;
     }
+
     button {
       margin: 0 12px 12px;
       width: calc(100% - 24px);
@@ -56,13 +64,16 @@
       border: none;
       border-radius: 8px;
       font-weight: bold;
+      font-size: 14px;
     }
+
     .final {
       text-align: center;
       padding: 24px;
     }
   </style>
 </head>
+
 <body>
 
 <div class="captcha">
@@ -71,11 +82,11 @@
 
   <div class="grid">
     <img src="1.jpg">
-<img src="2.jpg">
-<img src="3.jpg">
-<img src="4.jpg">
-<img src="5.jpg">
-<img src="6.jpg">
+    <img src="2.jpg">
+    <img src="3.jpg">
+    <img src="4.jpg">
+    <img src="5.jpg">
+    <img src="6.jpg">
   </div>
 
   <button onclick="verify()">Verify</button>
@@ -87,30 +98,35 @@
   });
 
   function verify() {
-    for (let i = 0; i < 80; i++) {
-  const c = document.createElement("div");
-  c.textContent = "💖";
-  c.style.position = "fixed";
-  c.style.left = Math.random() * 100 + "vw";
-  c.style.top = "-10px";
-  c.style.fontSize = (14 + Math.random() * 18) + "px";
-  c.style.transition = "transform 1.8s linear, top 1.8s linear, opacity 1.8s";
-  document.body.appendChild(c);
-
-  requestAnimationFrame(() => {
-    c.style.top = "110vh";
-    c.style.transform = `rotate(${Math.random()*720}deg)`;
-    c.style.opacity = "0";
-  });
-
-  setTimeout(() => c.remove(), 2000);
-}
+    // vis sluttsiden først
     document.body.innerHTML = `
       <div class="final">
         <h1>💘 Happy Valentine’s Day 💘</h1>
         <p>Du har bekreftet din valentin.</p>
       </div>
     `;
+
+    // konfetti
+    for (let i = 0; i < 80; i++) {
+      const c = document.createElement("div");
+      c.textContent = "💖";
+      c.style.position = "fixed";
+      c.style.left = Math.random() * 100 + "vw";
+      c.style.top = "-10px";
+      c.style.fontSize = (14 + Math.random() * 18) + "px";
+      c.style.transition = "transform 1.8s linear, top 1.8s linear, opacity 1.8s";
+      c.style.pointerEvents = "none";
+      c.style.zIndex = "9999";
+      document.body.appendChild(c);
+
+      requestAnimationFrame(() => {
+        c.style.top = "110vh";
+        c.style.transform = `rotate(${Math.random() * 720}deg)`;
+        c.style.opacity = "0";
+      });
+
+      setTimeout(() => c.remove(), 2000);
+    }
   }
 </script>
 
