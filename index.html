@@ -87,6 +87,24 @@
   });
 
   function verify() {
+    for (let i = 0; i < 80; i++) {
+  const c = document.createElement("div");
+  c.textContent = "💖";
+  c.style.position = "fixed";
+  c.style.left = Math.random() * 100 + "vw";
+  c.style.top = "-10px";
+  c.style.fontSize = (14 + Math.random() * 18) + "px";
+  c.style.transition = "transform 1.8s linear, top 1.8s linear, opacity 1.8s";
+  document.body.appendChild(c);
+
+  requestAnimationFrame(() => {
+    c.style.top = "110vh";
+    c.style.transform = `rotate(${Math.random()*720}deg)`;
+    c.style.opacity = "0";
+  });
+
+  setTimeout(() => c.remove(), 2000);
+}
     document.body.innerHTML = `
       <div class="final">
         <h1>💘 Happy Valentine’s Day 💘</h1>
